@@ -1,4 +1,4 @@
-let requestURL = 'https://ewen35550.github.io/JSON/package.json';
+let requestURL = 'https://ewen35550.github.io/SLAM/JS/package.json';
 let request = new XMLHttpRequest();
 
 let header = document.querySelector('.pageAccueil');
