@@ -1,0 +1,146 @@
+/* =========================== FONT GOOGLE : ROBOTO =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,500&display=swap');
+
+/* =========================== Variables CSS =========================== */
+:root{
+    /* ========== Couleurs ========== */
+    --first-color: #30475e;
+    --second-color: ;
+
+    /* ========== font size, familly, weight ========== */
+    --font-roboto: 'roboto', sans-serif;
+    --font-size-QuizName: 18px;
+    --font-size-NbrQuestions: 14px;
+}
+
+/* =========================== Classes Générales =========================== */
+*, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: var(--font-roboto);
+    overflow: hidden;
+}
+
+/* =========================== NAVBAR =========================== */
+#navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    background-color: var(--first-color);
+    z-index: 100;
+    box-shadow: 0px 5px 15px rgba(30, 51, 71, 0.4);
+
+}
+#navbar h1 {
+    font-size: 25px;
+    color:  #fff;
+}
+
+/* =========================== wrapper =========================== */
+.wrapper {
+    margin: 30px 0 0 0;
+    padding: 0 20px;
+}
+
+/* =========================== quiz =========================== */
+.quiz{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: var(--first-color);
+    color: #ffffff;
+    padding:  15px 20px 15px 35px;
+    margin-bottom: 30px;
+    border-radius: 40px;
+    box-shadow: 0px 10px 15px rgba(30, 51, 71, 0.4);
+    transition: all 0.3s;
+    user-select: none;
+}
+.quiz .quiz__infos .quiz__name {
+    font-size: var(--font-size-QuizName);
+    text-transform: uppercase;
+}
+.quiz .quiz__infos .number__questions{
+    color: #9db7d1;
+    font-weight: 500;
+    font-size: var(--font-size-NbrQuestions);
+}
+.quiz .launch__btn {
+    background: #fff;
+    color: var(--first-color);
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.quiz .launch__btn p { margin-right: 10px; }
+.quiz .launch__btn .bxs-rocket::before{ font-size: 18px; }
+
+/* =========================== questions =========================== */
+#questions-container{
+    width: 100%;
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 80px;
+    right: -100%;
+    padding: 20px;
+    background: #fff;
+    transition: all 0.3s;
+}
+#questions-container.show {
+    right: 0;
+}
+
+#questions-title{
+    margin-bottom: 20px;
+}
+#questions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;    
+    margin: 0 auto;
+}
+#questions button{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    padding: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+#questions button.correct {
+    border: 1px solid #00FF00;
+}
+
+#questions button.wrong {
+    border: 1px solid #FF0000;
+}
+
+#submit-questions button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+@media screen and (min-width : 768px){
+    #questions button{
+        width: calc((100% - 20px)/2);
+        
+    }
+    
+}
+
+
+
+
+
