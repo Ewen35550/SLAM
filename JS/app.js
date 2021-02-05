@@ -1,23 +1,18 @@
-let requestURL = 'https://ewen35550.github.io/SLAM/package.json';
-let request = new XMLHttpRequest();
-
-let header = document.querySelector('.pageAccueil');
-let section = document.querySelector('#Quiz');
-let article = document.querySelector('#Score');
-
-request.open('GET', requestURL);
-
-request.responseType = 'json';
-request.send();
-
-request.onload = function() {
-    let quiz = request.response;
-    populateHeader(quiz);
+window.onload = function() {
+    populateHeader();
 }
 
-function populateHeader(jsonObj) {
-    for (let i = 0; i < jsonObj['QUIZ'].length; i++){
-        let divQuiz = document.createElement('div');
+let listeQuiz = document.querySelector('.wrapper');
+let quesitonsContainer = document.querySelector('#questions-container');
+let article = document.querySelector('#Score');
+
+function populateHeader() {
+    fetch('JS/package.json')
+	.then(response => response.json())
+	.then(data => {
+
+        for (let i = 0; i < data['QUIZ'].length; i++){
+            let divQuiz = document.createElement('div');
             divQuiz.classList.add('quiz');
             listeQuiz.appendChild(divQuiz);
     
@@ -30,10 +25,10 @@ function populateHeader(jsonObj) {
     
             let myH1 = document.createElement('h1');
             myH1.classList.add('quiz__name');
-            myH1.textContent = jsonObj['QUIZ'][i].theme;
+            myH1.textContent = data['QUIZ'][i].theme;
             let myPara1 = document.createElement('p');
             myPara1.classList.add('number__questions');
-            myPara1.textContent = jsonObj['QUIZ'][i].nombreQuestions + " questions";
+            myPara1.textContent = data['QUIZ'][i].nombreQuestions + " questions";
             quizInfos.appendChild(myH1);
             quizInfos.appendChild(myPara1);
     
@@ -48,36 +43,36 @@ function populateHeader(jsonObj) {
             launchBtn.addEventListener('click', () => {
                 debutQuiz(i);
             });
-    }
-}
+        }
 
-// DEBUT QUIZ
+    });
+}
 
 function debutQuiz(nbQuiz){
     document.querySelector('#questions-container').classList.add('show');
-
-    quiz = request.response;
-    selectQuestion(quiz, nbQuiz);
+    selectQuestion(nbQuiz);
 }
-
-// QUESTIONS QUIZ
 
 let tableQuestions = [];
 let score = [];
 
-function selectQuestion(jsonObj, nbQuiz){
-    for(let i = 0; i < jsonObj['QUIZ'][nbQuiz]['totalQuestions'].length; i++){
-        tableQuestions.push(jsonObj['QUIZ'][nbQuiz]['totalQuestions'][i]);
-    }
-    showQuestion(nbQuiz);
+function selectQuestion(nbQuiz){
+    fetch('JS/package.json')
+	.then(response => response.json())
+	.then(data => {
+        for(let i = 0; i < data['QUIZ'][nbQuiz]['totalQuestions'].length; i++){
+            tableQuestions.push(data['QUIZ'][nbQuiz]['totalQuestions'][i]);
+        }
+        showQuestion(nbQuiz);
+    });
 }
 
 function showQuestion(nbQuiz){
+
     console.log(tableQuestions);
-    jsonObj = request.response;
-	
+
     document.querySelector('#questions-container').classList.add('show');
-	
+
     let insertQuestions = document.querySelector('#questions');
 
     document.querySelector('.suivant').disabled = true;
@@ -129,28 +124,9 @@ function showQuestion(nbQuiz){
                         showQuestion(nbQuiz);
                     });
                 }
-
             });
-
             insertQuestions.appendChild(buttonReponse);
         }
-
         tableQuestions.splice(tirageQuestion, 1);
     }
-}
-
-function showScore(score, nbQuiz){
-    section.classList.remove("active");
-    article.classList.add("active");
-    jsonObj = request.response;
-
-    let afficherLeScore = document.querySelector('.afficherScore');
-    afficherLeScore.innerHTML = "Votre score est de " + score + " sur " + jsonObj['QUIZ'][nbQuiz].nombreQuestions;
-
-}
-
-function changeQuiz(){
-    header.classList.add("active");
-    section.classList.remove("active");
-    article.classList.remove("active");
 }
