@@ -2,7 +2,6 @@ window.onload = function() {
     populateHeader();
 }
 
-let listeQuiz = document.querySelector('.wrapper');
 let quesitonsContainer = document.querySelector('#questions-container');
 let article = document.querySelector('#Score');
 
@@ -11,6 +10,8 @@ function populateHeader() {
 	.then(response => response.json())
 	.then(data => {
 
+	    let listeQuiz = document.querySelector('.wrapper');
+	    
         for (let i = 0; i < data['QUIZ'].length; i++){
             let divQuiz = document.createElement('div');
             divQuiz.classList.add('quiz');
