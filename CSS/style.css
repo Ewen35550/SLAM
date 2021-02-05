@@ -118,11 +118,11 @@ body {
 }
 
 #questions button.correct {
-    border: 1px solid #00FF00;
+    border: 2px solid #00FF00;
 }
 
 #questions button.wrong {
-    border: 1px solid #FF0000;
+    border: 2px solid #FF0000;
 }
 
 #submit-questions button {
